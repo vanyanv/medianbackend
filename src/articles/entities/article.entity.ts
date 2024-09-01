@@ -2,6 +2,9 @@ import { Article } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ArticleEntity implements Article {
+  @ApiProperty({ required: false, nullable: true })
+  authorId: string | null;
+
   @ApiProperty()
   id: number;
 

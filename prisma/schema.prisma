@@ -13,22 +13,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Article {
-  id Int @id @default(autoincrement())
-  title String @unique
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
   description String?
-  body String
-  published Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  body        String
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User?    @relation(fields: [authorId], references: [id])
+  authorId    String?
 }
 
 model User {
-  id String @id @default(uuid())
-  username String? @unique
-  email String @unique 
-  password String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  articles  Article[]
 }
