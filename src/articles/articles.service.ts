@@ -12,11 +12,17 @@ export class ArticlesService {
   }
 
   findAll() {
-    return this.prisma.article.findMany({ where: { published: true } });
+    return this.prisma.article.findMany({
+      where: { published: true },
+      orderBy: [{ createdAt: 'desc' }],
+    });
   }
 
   findDrafts() {
-    return this.prisma.article.findMany({ where: { published: false } });
+    return this.prisma.article.findMany({
+      where: { published: false },
+      orderBy: [{ createdAt: 'desc' }],
+    });
   }
 
   findOne(id: number) {
